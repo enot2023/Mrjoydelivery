@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section Start -->
+   <div class="main-section">
+	<!-- Home Pages Elements Strat -->
+	<!-- Main Search Start -->
+
+	<div class="page-section nopadding cs-nomargin" style="padding-top: 10px; padding-bottom: 170px; margin-bottom: 0px; background: url('/static/extra-images/bg-image1.jpg') no-repeat center / cover;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 top: 100px !important; ">
+					<div class="element-title" >
+						<h1 style="font-size: 40px; color: #060000 !important; padding-top: 100px;  text-transform: uppercase; line-height: 50px; margin-bottom: 20px; text-align:center;">
+							Fresh from the kitchen, <br>just how you want it</h1>
+						<p style="font-size: 18px; letter-spacing: 1px; color: #7e7e7e !important;   text-align:center;">
+							   Want to feel good order with Mr. Joy Delivery.</p>
+					</div>
+				</div>
+				
+				
+			</div>
+		</div>
+	</div>
+
+	
+	<!-- Main Search End -->
+	
+	<!-- Top Restarurants Section Start -->
+	<div class="page-section nopadding cs-nomargin" style="margin-top: 0px;padding-top: 30px;padding-bottom: 0px;margin-bottom: 0px;background: #ffffff;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="element-title align-left">
+						<h2>Top Restaurants</h2>
+						<p>Explore the top restaurants, bars, and cafés:</p>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-right: 0 !important; padding-left: 0 !important;">
+					<div class="company-logo">
+						<ul>
+							{% for vendor in vendors %}
+							<li class="has-border">
+								<figure>
+									{% if vendor.user_profile.profile_picture %}
+									<a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{{ vendor.user_profile.profile_picture.url }}" class="attachment-full size-full wp-post-image" alt=""></a>
+									{% else%}
+									<a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{% static 'images/default-profile.png' %}" class="attachment-full size-full wp-post-image" alt=""></a>
+									{% endif %}
+								</figure>
+							</li>
+							{% endfor %}
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Top Restarurants Section End -->
+	<!-- Choose From Most Popular Listin Start -->
+	<div class="page-section nopadding cs-nomargin" style="margin-top: 0px;padding-top: 60px;padding-bottom: 50px;margin-bottom: 0px;background: #ffffff;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="element-title align-center">
+						<h2>Choose From Most Popular Restaurants</h2>
+						<p>An award-winning restaurant specializing in progressive Indian and Manipuri cuisine with a fusion of flavors and creative presentations.</p>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="listing fancy">
+						<ul class="row">
+
+							{% for vendor in vendors %}
+							<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								<div class="list-post featured">
+									<div class="img-holder">
+										<figure>
+											<a href="{% url 'vendor_detail' vendor.vendor_slug %}">
+											{% if vendor.user_profile.profile_picture %}
+												<img src="{{ vendor.user_profile.profile_picture.url }}" class="attachment-full size-full wp-post-image" alt="">
+												{% else%}
+												<a href="{% url 'vendor_detail' vendor.vendor_slug %}"><img src="{% static 'images/default-profile.png' %}" class="attachment-full size-full wp-post-image" alt=""></a>
+												{% endif %}
+											</a>
+										</figure>
+										{% if vendor.is_open %}
+										<span class="restaurant-status open">
+											<em class="bookmarkRibbon"></em>open
+										</span>
+										{% else %}
+										<span class="restaurant-status close">
+											<em class="bookmarkRibbon"></em>close
+										</span>
+										{% endif %}
+										
+									</div>
+									<div class="text-holder">
+										
+										<div class="post-title">
+											<h5>
+												<a href="listing-detail.html">{{ vendor }}</a>
+											</h5>
+										</div>
+										{% if vendor.user_profile.city and vendor.user_profile.city and vendor.user_profile.city  %}
+										<span>{{ vendor.user_profile.city }}, {{ vendor.user_profile.state }}, {{ vendor.user_profile.pincode }}</span>
+										{% endif %}
+									</div>
+									<div class="list-option">
+										<a href="javascript:void(0);" class="shortlist-btn" data-toggle="model" data-target="#sihn-in">
+											<i class="icon-heart-o"></i>
+										</a>
+									</div>
+									
+								</div>
+							</li>
+							{% endfor %}
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Choose From Most Popular Listing End -->
+
+	<!-- Home Pages Elements End  -->
+{% endblock %}
+
